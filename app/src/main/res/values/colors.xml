@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<color	name="colorPrimary">#FFFFFF</color>
+	<color	name="colorPrimaryDark">#444444</color>
+	<color	name="colorAccent">#000000</color>
+	<color	name="colorControlHighlight">#AAAAAA</color>
+	<color	name="colorControlNormal">#000000</color>
+	<color	name="colorNavigationBar">#F5F5F5</color>
+
+	<color	name="colorDarkPrimary">#444444</color>
+	<color	name="colorDarkPrimaryDark">#F4F4F4</color>
+	<color	name="colorDarkAccent">#FFFFFF</color>
+	<color	name="colorDarkControlHighlight">#AAAAAA</color>
+	<color	name="colorDarkControlNormal">#000000</color>
+	<color	name="colorDarkNavigationBar">#444444</color>
+	
+	
+	
+</resources>

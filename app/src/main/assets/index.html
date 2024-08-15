@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="bn">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="libs/android.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="libs/onsenui/css/onsenui.min.css">
+        <script>
+            document.write('<link rel="stylesheet" href="libs/onsenui/css/'+android.getData("theme","light")+'-onsen-css-components.min.css">');
+        </script>
+        <link rel="stylesheet" href="icons/std-feather.css">
+        <link rel="stylesheet" href="icons/std-material.css">
+        
+        <link rel="stylesheet" href="css/fonts.css">
+        <link rel="stylesheet" href="css/index.css"/>
+        <script src="libs/onsenui/js/onsenui.min.js"></script>
+        <script src="js/json_data.js" type="text/javascript"></script>
+        <script src="js/index.js" type="text/javascript"></script>
+        <title>প্রবাদ প্রবচন</title>
+        <script>
+            ons.platform.select(android.getData("platform","android"));
+        </script>
+    </head>
+    <body>
+    <ons-navigator id="main-nav-handler" page="splash_screen.html"></ons-navigator>
+    
+    <!-- This is splash screen -->
+    <template id="splash_screen.html">
+        <ons-page id="splash-screen">
+            <div class="splash-screen">
+                
+            <span class="title">প্রবাদ প্রবচন</span>
+                
+            <span class="sub-title">হারিয়ে যাওয়া গ্রাম বাংলার মুখ রচিত প্রবাদ বাক্য</span>
+            
+            <img src="./imgs/writer.png" />
+            
+            <span class="_sub-title">মোঃ ইছাহক আলী মন্ডল</span>
+            <ons-progress-bar indeterminate="true"></ons-progress-bar>
+            
+            </div>
+        </ons-page>
+    </template>
+
+    <!-- This is home page -->
+    <template id="home.html">
+        <ons-page id="home">
+            <ons-splitter>
+                <ons-splitter-side id="home-drawer" page="home_drawer.html" swipeable width="60%" collapse swipe-target-width="300px"></ons-splitter-side>
+                <ons-splitter-content>
+                    <ons-page>
+                        <ons-toolbar>
+                            <div class="left">
+                                <ons-toolbar-button onclick="home_drawer_handler.open();">
+                                    <i class="std-icon std-menu"></i>
+                                </ons-toolbar-button>
+                            </div>
+                            <div class="center">প্রবাদ প্রবচন</div>
+                            <div class="right">
+                                <ons-toolbar-button onclick="textReader();">
+                                    <i class="std-icon std-book"></i>
+                                </ons-toolbar-button>
+                            </div>
+                        </ons-toolbar>
+                        
+                        <ons-pull-hook id="pull-hook" height="40px">
+                            <svg class="progress-circular progress-circular--indeterminate">
+                                <circle class="progress-circular__background" />
+                                <circle class="progress-circular__primary progress-circular--indeterminate__primary" />
+                                <circle
+                                    class="progress-circular__secondary progress-circular--indeterminate__secondary" />
+                            </svg>
+                        </ons-pull-hook>
+                        
+                        <div id="container">
+                        </div>
+                        
+                        <div onclick="makePayment();" class="card bottom-toolbar">
+                            <div class="left">
+                                ★৫০টি স্পেসাল প্রবাদ বাক্য পেতে,<br/>৫০ টাকা <span>“বিকাশ করুন”</span>
+                            </div>
+                            <div class="right">
+                                <payment>৳৫০</payment>
+                            </div>
+                        </div>
+                    </ons-page>
+                </ons-splitter-content>
+            </ons-splitter>
+        </ons-page>
+    </template>
+
+    <!-- This is home page drawer -->
+    <template id="home_drawer.html">
+        <ons-page id="home-drawer">
+            <style>
+                .home-drawer-header {
+                    height: 150px;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                
+                .home-drawer-header > .title {
+                    font-size: 40px;
+                    font-family: "font-7"
+                }
+                
+                .home-drawer-header > .sub_title {
+                    font-size: 17px;
+                    font-family: "font-7";
+                    margin-bottom: 5px;
+                }
+                
+                .home-drawer-header-btn {
+                    margin: 8px;
+                    padding: 5px;
+                    border-radius: 4px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 16px;
+                    border: 1px solid #acacac;
+                }
+            </style>
+
+            <div class="home-drawer-header">
+                <span class="title">প্রবাদ প্রবচন</span>
+                <span class="sub_title">মোঃ ইছাহক আলী মন্ডল</span>
+                <div id="platform_mode" onclick="swipePlatform(this);" class="home-drawer-header-btn"><script>if(android.getData("platform","android")=="android"){document.getElementById("platform_mode").innerHTML="Swipe to iPhone";}else{document.getElementById("platform_mode").innerHTML = "Swipe to Android";}</script></div>
+            </div>
+
+            <ons-list id="home-drawer-list">
+
+                <ons-list-item onclick="home_drawer_handler.close();showSettingsDialog();"
+                    tappable>
+                    <div class="left">
+                        <i class="list-item__icon std-icon std-settings"></i>
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">Settings</span>
+                    </div>
+                </ons-list-item>
+                
+                <ons-list-item onclick="home_drawer_handler.close();textReader();" tappable>
+                    <div class="left">
+                        <i class="list-item__icon std-icon std-book"></i>
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">Text Reader</span>
+                    </div>
+                </ons-list-item>
+                
+                
+                <ons-list-item onclick="home_drawer_handler.close();main_nav_handler.pushPage('info.html');"
+                    tappable>
+                    <div class="left">
+                        <i class="list-item__icon std-icon std-info"></i>
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">লেখক পরিচিতি</span>
+                    </div>
+                </ons-list-item>
+                
+                <ons-list-header>Comunications</ons-list-header>
+
+                <ons-list-item onclick="home_drawer_handler.close();main_nav_handler.pushPage('abouts.html');" tappable>
+                    <div class="left">
+                        <i class="list-item__icon std-icon std-help-circle"></i>
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">Abouts</span>
+                    </div>
+                </ons-list-item>
+
+                <ons-list-item onclick="home_drawer_handler.close();android.rate();" tappable>
+                    <div class="left">
+                        <i class="list-item__icon std-icon std-star"></i>
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">Rate</span>
+                    </div>
+                </ons-list-item>
+
+                <ons-list-item onclick="home_drawer_handler.close();android.share();" tappable>
+                    <div class="left">
+                        <i class="list-item__icon std-icon std-share-2"></i>
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">Share</span>
+                    </div>
+                </ons-list-item>
+                
+                <ons-list-item onclick="home_drawer_handler.close();android.facebook();" tappable>
+                    <div class="left">
+                        <i class="list-item__icon std-icon std-facebook"></i>
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">Facebook</span>
+                    </div>
+                </ons-list-item>
+
+                <ons-list-item onclick="home_drawer_handler.close();android.feedback();" tappable>
+                    <div class="left">
+                        <i class="list-item__icon std-icon std-message-square"></i>
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">Feedback</span>
+                    </div>
+                </ons-list-item>
+
+                <ons-list-item onclick="home_drawer_handler.close();android.rate();" tappable>
+                    <div class="left">
+                        <m class="list-item__icon std-icon stdm-apps"></m>
+                    </div>
+                    <div class="center">
+                        <span class="list-item__title">More Apps</span>
+                    </div>
+                </ons-list-item>
+
+            </ons-list>
+        </ons-page>
+    </template>
+    
+    <!-- This is probad page -->
+    <template id="probad.html">
+        <ons-page id="probad_page">
+            <ons-toolbar id="page-header">
+                <div class="left">
+                    <ons-back-button></ons-back-button>
+                </div>
+                <div id="page-title" class="center"></div>
+                <div class="right">
+                    <ons-toolbar-button id="fullscreen">
+                        <i class="std-icon std-maximize"></i>
+                    </ons-toolbar-button>
+                    <ons-toolbar-button onclick="showSettingsDialog();">
+                        <i class="std-icon std-settings"></i>
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            
+            <div class="content" id="page-body">
+                <div id="main-container">
+                    
+                </div>
+            </div>
+            
+            <ons-speed-dial id="reader-fab" position="bottom right" direction="left" style="margin-bottom:50px;">
+                
+                <ons-range id="vertical-speak-speed" onchange="changeSpeakSpeed(this,true);" min="1" max="30" style="display:none;position:relative;top:-90px;left:85px;transform:rotate(-90deg);" value="5"></ons-range>
+                
+                <ons-fab onclick="toggleBtn('md-volume-up','md-stop')">
+                    <ons-icon id="md-volume-up" icon="md-volume-up"></ons-icon>
+                </ons-fab>
+                <ons-speed-dial-item onclick="toggleBtn('md-repeat-one','md-repeat');">
+                    <ons-icon id="md-repeat-one" icon="md-repeat"></ons-icon>
+                </ons-speed-dial-item>
+                <ons-speed-dial-item onclick="speakNext();">
+                    <ons-icon icon="md-skip-next"></ons-icon>
+                </ons-speed-dial-item>
+                <ons-speed-dial-item onclick="toggleBtn('md-play','md-pause');">
+                    <ons-icon id="md-play" icon="md-pause"></ons-icon>
+                </ons-speed-dial-item>
+                <ons-speed-dial-item onclick="speakPrevious();">
+                    <ons-icon icon="md-skip-previous"></ons-icon>
+                </ons-speed-dial-item>
+            </ons-speed-dial>
+            
+            <div onclick="makePayment();" class="card bottom-toolbar">
+                <div class="left">
+                    ★৫০টি স্পেসাল প্রবাদ বাক্য পেতে,<br/>৫০ টাকা <span>“বিকাশ করুন”</span>
+                </div>
+                <div class="right">
+                    <payment>৳৫০</payment>
+                </div>
+            </div>
+        </ons-page>
+    </template>
+    
+    
+    <template id="probad_page_fullscreen.html">
+        <ons-page id="probad_page_fullscreen">
+            
+            <ons-fab id="go-minimize" style="position:relative;top:40%;left:8px;" class="fab--mini">
+                <ons-icon icon="md-arrow-back"></ons-icon>
+            </ons-fab>
+            
+            <ons-fab onclick="showSettingsDialog();" position="right top" style="top:40%;right:8px;" class="fab--mini">
+                <ons-icon icon="md-settings"></ons-icon>
+            </ons-fab>
+            
+            <ons-fab id="edit" onclick="textReader(true);" position="right top" style="top:60%;right:8px;" class="fab--mini">
+                <ons-icon icon="md-edit"></ons-icon>
+            </ons-fab>
+            
+            <div class="content">
+                <div class="card" id="page-title"  style="text-align:center;font-size:18px;padding:1px;margin:0px;position:fixed;top:0px;left:0px;z-index:2000;border-radius:0px;width:100%;"></div>
+                <div id="main-container">
+                    
+                </div>
+            </div>
+            
+            <payment onclick="makePayment();" style="position:fixed;bottom:20px;left:8px;">৳৫০</payment>
+            
+            <ons-speed-dial id="reader-fab" position="bottom right" direction="left">
+                
+                <ons-range id="vertical-speak-speed" onchange="changeSpeakSpeed(this,true);" min="1" max="30" style="display:none;position:relative;top:-90px;left:85px;transform:rotate(-90deg);" value="5"></ons-range>
+                
+                <ons-fab onclick="toggleBtn('md-volume-up','md-stop')">
+                    <ons-icon id="md-volume-up" icon="md-volume-up"></ons-icon>
+                </ons-fab>
+                <ons-speed-dial-item onclick="toggleBtn('md-repeat-one','md-repeat');">
+                    <ons-icon id="md-repeat-one" icon="md-repeat"></ons-icon>
+                </ons-speed-dial-item>
+                <ons-speed-dial-item onclick="speakNext();">
+                    <ons-icon icon="md-skip-next"></ons-icon>
+                </ons-speed-dial-item>
+                <ons-speed-dial-item onclick="toggleBtn('md-play','md-pause');">
+                    <ons-icon id="md-play" icon="md-pause"></ons-icon>
+                </ons-speed-dial-item>
+                <ons-speed-dial-item onclick="speakPrevious();">
+                    <ons-icon icon="md-skip-previous"></ons-icon>
+                </ons-speed-dial-item>
+            </ons-speed-dial>
+        </ons-page>
+    </template>
+    
+    
+    
+    <!-- This is info page -->
+    <template id="info.html">
+        <ons-page id="info_page">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button></ons-back-button>
+                </div>
+                <div class="center">লেখক পরিচিতি</div>
+                <div class="right">
+                    <ons-toolbar-button onclick="showSettingsDialog();">
+                        <i class="std-icon std-send"></i>
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <div class="page-content" style="text-align:center;">
+                <img style="width:100px;height:100px;border-radius:50%;border:1px solid gray;margin:8px;" src="imgs/writer.png"/>
+                <p style="font-size:25px;font-family:font-7;">হুমায়ূন আহমেদ</p>
+                <span style="font-size:20px;font-family:font-3;padding:8px;float:left;">
+                    জন্মঃ ১৩ নভেম্বর ১৯৪৮ - ১৯ জুলাই ২০১২। তিনি ছিলেন একজন বাংলাদেশি ঔপন্যাসিক, ছোটগল্পকার, নাট্যকার এবং গীতিকার, চিত্রনাট্যকার ও চলচ্চিত্র নির্মাতা। তিনি বিংশ শতাব্দীর জনপ্রিয় বাঙালি কথাসাহিত্যিকদের মধ্যে অন্যতম। তাকে বাংলাদেশের স্বাধীনতা পরবর্তী অন্যতম শ্রেষ্ঠ লেখক বলে গণ্য করা হয়। বাংলা কথাসাহিত্যে তিনি সংলাপপ্রধান নতুন শৈলীর জনক। অন্য দিকে তিনি আধুনিক বাংলা বৈজ্ঞানিক কল্পকাহিনীর পথিকৃৎ। নাটক ও চলচ্চিত্র পরিচালক হিসাবেও তিনি সমাদৃত। তার প্রকাশিত গ্রন্থের সংখ্যা তিন শতাধিক। তার বেশ কিছু গ্রন্থ পৃথিবীর নানা ভাষায় অনূদিত হয়েছে, বেশ কিছু গ্রন্থ স্কুল-কলেজ বিশ্ববিদ্যালয়ের পাঠ্যসূচীর অন্তর্ভুক্ত।
+                </span>
+            </div>
+            <ons-fab position="bottom right">
+                <ons-icon icon="md-phone"></ons-icon>
+            </ons-fab>
+        </ons-page>
+    </template>
+    
+    <!-- This is abouts page -->
+    <template id="abouts.html">
+        <ons-page id="abouts_page">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button></ons-back-button>
+                </div>
+                <div class="center">Abouts</div>
+                <div class="right">
+                    <ons-toolbar-button onclick="showSettingsDialog();">
+                        <i class="std-icon std-phone-call"></i>
+                    </ons-toolbar-button>
+                    <ons-toolbar-button onclick="showSettingsDialog();">
+                        <i class="std-icon std-send"></i>
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+        </ons-page>
+    </template>
+    
+    </body>
+</html>

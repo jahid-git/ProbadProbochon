@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+	<style 	name="AppTheme"	parent="@android:style/Theme.Material.Light.NoActionBar">
+		<item   name="android:windowLightNavigationBar">true</item>
+		<item   name="android:windowLightStatusBar">true</item>
+		<item 	name="android:colorPrimary">@color/colorPrimary</item>
+		<item 	name="android:colorPrimaryDark">@color/colorPrimary</item>
+		<item 	name="android:colorAccent">@color/colorAccent</item>
+		<item 	name="android:colorControlHighlight">@color/colorControlHighlight</item>
+		<item 	name="android:colorControlNormal">@color/colorControlNormal</item>
+		<item   name="android:navigationBarColor">@color/colorNavigationBar</item>
+	</style>
+	
+	<style 	name="AppThemeDark"	parent="@android:style/Theme.Material.NoActionBar">
+		<item   name="android:windowLightNavigationBar">false</item>
+		<item   name="android:windowLightStatusBar">false</item>
+		<item   name="android:windowBackground">@color/colorDarkPrimary</item>
+		<item 	name="android:colorPrimary">@color/colorDarkPrimary</item>
+		<item 	name="android:colorPrimaryDark">@color/colorDarkPrimary</item>
+		<item 	name="android:colorAccent">@color/colorDarkAccent</item>
+		<item 	name="android:colorControlHighlight">@color/colorDarkControlHighlight</item>
+		<item 	name="android:colorControlNormal">@color/colorDarkControlNormal</item>
+		<item   name="android:navigationBarColor">@color/colorDarkNavigationBar</item>
+	</style>
+	
+</resources>
